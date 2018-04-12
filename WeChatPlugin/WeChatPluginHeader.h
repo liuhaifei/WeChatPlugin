@@ -371,6 +371,9 @@ __attribute__((visibility("hidden")))
 
 + (id)sharedInstance;
 - (void)onAuthOK;
+- (BOOL)updaterMayCheckForUpdates:(id)arg1;
+- (void)checkForUpdates;
+- (void)updater:(id)arg1 didFindValidUpdate:(id)arg2;
 @property(nonatomic) MMChatsViewController *chatsViewController;
 @property(nonatomic) BOOL isAppTerminating;
 @end

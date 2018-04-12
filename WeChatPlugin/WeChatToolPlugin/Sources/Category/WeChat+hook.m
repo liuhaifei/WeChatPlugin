@@ -31,6 +31,10 @@ static char tkRemoteControlWindowControllerKey;     //  远程控制窗口的关
     tk_hookMethod(objc_getClass("LogoutCGI"), @selector(sendLogoutCGIWithCompletion:), [self class], @selector(hook_sendLogoutCGIWithCompletion:));
     //      置底
     tk_hookMethod(objc_getClass("MMSessionMgr"), @selector(sortSessions), [self class], @selector(hook_sortSessions));
+    //      禁用升级提示
+    tk_hookMethod(objc_getClass("WeChat"), @selector(updaterMayCheckForUpdates:), [self class], @selector(hook_updaterMayCheckForUpdates:));
+    tk_hookMethod(objc_getClass("WeChat"), @selector(checkForUpdates), [self class], @selector(hook_checkForUpdates));
+    tk_hookMethod(objc_getClass("WeChat"), @selector(updater:didFindValidUpdate:), [self class], @selector(hook_updater:didFindValidUpdate:));
     
     [self setup];
     [self replaceAboutFilePathMethod];
@@ -483,4 +487,13 @@ static char tkRemoteControlWindowControllerKey;     //  远程控制窗口的关
     }
 }
 
++ (BOOL)hook_updaterMayCheckForUpdates:(id)msg {
+    return NO;
+}
+
+- (void)hook_checkForUpdates {
+}
+
+- (void)hook_updater:(id)arg1 didFindValidUpdate:(id)arg2 {
+}
 @end
